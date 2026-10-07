@@ -18,16 +18,32 @@
   var burger = document.getElementById("hamburger");
   var nav = document.getElementById("mainNav");
   if (burger && nav) {
+    var setMenuOpen = function (isOpen) {
+      burger.classList.toggle("open", isOpen);
+      nav.classList.toggle("open", isOpen);
+      burger.setAttribute("aria-expanded", String(isOpen));
+    };
+
+    burger.setAttribute("aria-expanded", String(nav.classList.contains("open")));
     burger.addEventListener("click", function () {
-      burger.classList.toggle("open");
-      nav.classList.toggle("open");
+      setMenuOpen(!nav.classList.contains("open"));
     });
-    // Close menu when a link is tapped
+
     nav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        burger.classList.remove("open");
-        nav.classList.remove("open");
+        setMenuOpen(false);
       });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && nav.classList.contains("open")) {
+        setMenuOpen(false);
+        burger.focus();
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 992) setMenuOpen(false);
     });
   }
 

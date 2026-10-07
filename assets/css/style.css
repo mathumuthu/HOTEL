@@ -202,11 +202,15 @@ section { position: relative; }
 .booking-field select {
   width: 100%; appearance: none;
   background: transparent; color: var(--white);
-  border: 1px solid rgba(255,255,255,.25);
+  border: 1px solid rgba(5, 9, 87, 0.25);
   padding: 15px 44px 15px 22px;
   font-family: var(--font-sans); font-size: 15px; font-weight: 300;
   letter-spacing: .04em; outline: none; cursor: pointer;
   transition: border-color .3s;
+}
+.booking-field select option {
+    background: #123422;
+    color: #ffffff;
 }
 .booking-field select:focus { border-color: var(--gold); }
 .booking-field::after {
@@ -621,9 +625,13 @@ section { position: relative; }
   .main-nav {
     position: fixed; inset: var(--header-h) 0 auto 0;
     background: var(--white); box-shadow: 0 30px 60px rgba(0,0,0,.12);
-    max-height: 0; overflow: hidden; transition: max-height .5s var(--ease);
+    max-height: 0; overflow: hidden; visibility: hidden;
+    transition: max-height .5s var(--ease), visibility 0s linear .5s;
   }
-  .main-nav.open { max-height: 480px; }
+  .main-nav.open {
+    max-height: 480px; visibility: visible;
+    transition: max-height .5s var(--ease), visibility 0s;
+  }
   .main-nav ul { flex-direction: column; padding: 20px 0; gap: 4px; }
   .main-nav li { width: 100%; text-align: center; }
   .main-nav a { padding: 14px 0; font-size: 15px; }
