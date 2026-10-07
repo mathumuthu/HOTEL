@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stackly Restaurant | Sign In</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --green:#166534;
+    --dark:#10251a;
+    --light:#dcfce7;
+    --bg:#f5f7f6;
+    --border:#e5ebe7;
+    --muted:#718078;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:linear-gradient(135deg,#f5f7f6,#e9f5ed);
+    min-height:100vh;
+    color:#17221b;
+}
+
+/* Main Wrapper */
+.signin-wrap{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:22px;
+}
+
+/* Card */
+.signin-card{
+    width:100%;
+    max-width:440px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:32px;
+    box-shadow:0 20px 60px rgba(16,37,26,.12);
+    animation:cardIn .6s ease;
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Logo */
+.logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.logo-mark{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    background:var(--dark);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.logo h1{
+    font-size:25px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#22c55e;
+}
+
+/* Heading */
+h2{
+    text-align:center;
+    font-size:24px;
+    margin-bottom:7px;
+}
+
+.sub{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:25px;
+}
+
+/* Role */
+.role-select{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.role-option{
+    position:relative;
+}
+
+.role-option input{
+    position:absolute;
+    opacity:0;
+}
+
+.role-option label{
+    display:block;
+    text-align:center;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.role-option label:hover{
+    border-color:#86efac;
+}
+
+.role-option input:checked + label{
+    background:var(--light);
+    border-color:#86efac;
+    color:var(--green);
+}
+
+/* Fields */
+.field{
+    margin-bottom:17px;
+}
+
+.field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap input{
+    width:100%;
+    padding:13px 45px 13px 13px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    outline:none;
+    font-size:13px;
+    transition:.25s;
+}
+
+.input-wrap input:focus{
+    border-color:#65a374;
+    box-shadow:0 0 0 3px rgba(22,101,52,.08);
+}
+
+/* Eye */
+.eye{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:transparent;
+    cursor:pointer;
+    font-size:18px;
+}
+
+/* Error */
+.error{
+    color:#dc2626;
+    font-size:11px;
+    margin-top:6px;
+    display:none;
+}
+
+/* Sign In Button */
+.login-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:var(--green);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.login-btn:hover{
+    background:#14532d;
+    transform:translateY(-1px);
+}
+
+/* Back Home */
+.home-btn{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#fff;
+    color:var(--dark);
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.home-btn:hover{
+    background:#f0fdf4;
+    border-color:#86efac;
+}
+
+/* Bottom Text */
+.demo{
+    margin-top:18px;
+    padding:11px;
+    background:#f8faf9;
+    border-radius:10px;
+    font-size:10px;
+    color:var(--muted);
+    line-height:1.6;
+    text-align:center;
+}
+
+/* Mobile */
+@media(max-width:480px){
+
+    .signin-wrap{
+        padding:14px;
+    }
+
+    .signin-card{
+        padding:24px 18px;
+        border-radius:17px;
+    }
+
+    .logo h1{
+        font-size:22px;
+    }
+
+    h2{
+        font-size:21px;
+    }
+
+    .role-select{
+        gap:7px;
+    }
+
+}
+.signup-btn{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:1px solid #166534;
+    border-radius:10px;
+    background:#fff;
+    color:#166534;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.signup-btn:hover{
+    background:#166534;
+    color:#fff;
+    transform:translateY(-1px);
+}.logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+    object-fit:contain;
+}
+
+.logo h1{
+    font-size:25px;
+    font-weight:800;
+    margin:0;
+}
+
+.logo span{
+    color:#22c55e;
+}
+</style>
+</head>
+
+<body>
+
+<div class="signin-wrap">
+
+    <div class="signin-card">
+
+        <!-- Logo -->
+<div class="logo">
+    <img src="Glossy Forest Green Ribbon Emblem (1).webp" alt="STACKLY Logo">
+
+    <h1>
+        STACKLY<span></span>
+    </h1>
+</div>
+
+        <!-- Heading -->
+        <h2>Sign In</h2>
+
+        <p class="sub">
+            Sign in to access your restaurant dashboard
+        </p>
+
+        <!-- Form -->
+        <form id="loginForm">
+
+            <!-- Role -->
+            <div class="role-select">
+
+                <div class="role-option">
+                    <input
+                        type="radio"
+                        name="role"
+                        id="userRole"
+                        value="user"
+                        checked
+                    >
+
+                    <label for="userRole">
+                        👤 User
+                    </label>
+                </div>
+
+                <div class="role-option">
+                    <input
+                        type="radio"
+                        name="role"
+                        id="adminRole"
+                        value="admin"
+                    >
+
+                    <label for="adminRole">
+                        ⚙ Admin
+                    </label>
+                </div>
+
+            </div>
+
+            <!-- Email -->
+            <div class="field">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        id="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+                </div>
+
+                <div class="error" id="emailError">
+                    Please enter a valid email address.
+                </div>
+
+            </div>
+
+            <!-- Password -->
+            <div class="field">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <button
+                        class="eye"
+                        type="button"
+                        id="eyeBtn"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+                <div class="error" id="passwordError">
+                    Password is required.
+                </div>
+
+            </div>
+
+            <!-- Sign In -->
+            <button
+                class="login-btn"
+                type="submit"
+            >
+                Sign In →
+            </button>
+<!-- Sign Up -->
+<button
+    class="signup-btn"
+    type="button"
+    onclick="window.location.href='sig.html'"
+>
+    Create Account →
+</button>
+            <!-- Back Home -->
+            <button
+                class="home-btn"
+                type="button"
+                onclick="window.location.href='index.html'"
+            >
+                ← Back Home
+            </button>
+            
+
+        </form>
+
+        <!-- Demo -->
+        <div class="demo">
+            Choose <b>User</b> or <b>Admin</b>,
+            enter a valid email and password.
+            Your selected role decides which dashboard opens.
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const form = document.getElementById("loginForm");
+
+const password = document.getElementById("password");
+
+const email = document.getElementById("email");
+
+const eyeBtn = document.getElementById("eyeBtn");
+
+const emailError = document.getElementById("emailError");
+
+const passwordError = document.getElementById("passwordError");
+
+
+/* Password Show / Hide */
+
+eyeBtn.addEventListener("click", () => {
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        eyeBtn.textContent = "🙈";
+
+    }else{
+
+        password.type = "password";
+
+        eyeBtn.textContent = "👁";
+
+    }
+
+});
+
+
+/* Login */
+
+form.addEventListener("submit", (e) => {
+
+    e.preventDefault();
+
+    const emailValue = email.value.trim();
+
+    const passwordValue = password.value;
+
+    const role = document.querySelector(
+        'input[name="role"]:checked'
+    ).value;
+
+
+    emailError.style.display = "none";
+
+    passwordError.style.display = "none";
+
+
+    let valid = true;
+
+
+    /* Email Validation */
+
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)){
+
+        emailError.style.display = "block";
+
+        valid = false;
+
+    }
+
+
+    /* Password Validation */
+
+   /* Password Validation */
+
+if(!passwordValue){
+    passwordError.textContent = "Please enter your password.";
+    passwordError.style.display = "block";
+    valid = false;
+}
+else if(!/[^A-Za-z0-9]/.test(passwordValue)){
+    passwordError.textContent = "Password must contain at least one special character.";
+    passwordError.style.display = "block";
+    valid = false;
+}
+
+
+    if(!valid) return;
+
+
+    /* Save Login */
+
+    let account = null;
+
+    try {
+        account = JSON.parse(localStorage.getItem("restaurantAccount"));
+    } catch (error) {
+        account = null;
+    }
+
+    const matchingAccount = account &&
+        account.email &&
+        account.email.toLowerCase() === emailValue.toLowerCase()
+        ? account
+        : null;
+    const fallbackName = emailValue.split("@")[0]
+        .replace(/[._-]+/g, " ")
+        .replace(/\b\w/g, character => character.toUpperCase());
+
+    localStorage.setItem(
+        "restaurantLogin",
+        JSON.stringify({
+            loggedIn:true,
+            email:emailValue,
+            name:matchingAccount?.name || fallbackName,
+            password:passwordValue,
+            role:role
+        })
+    );
+
+
+    /* Dashboard Redirect */
+
+    if(role === "admin"){
+
+        window.location.href =
+            "restaurant-admin-dashboard.html";
+
+    }else{
+
+        window.location.href =
+            "restaurant-user-dashboard.html";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

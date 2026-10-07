@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Stackly Restaurant | Admin Dashboard</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><style>
+:root{--primary:#166534;--primary-dark:#14532d;--primary-light:#dcfce7;--bg:#f5f7f6;--white:#fff;--text:#17221b;--muted:#718078;--border:#e5ebe7;--success:#16a34a;--danger:#dc2626;--warning:#d97706;--sidebar:260px}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;background:#10251a;color:#fff;padding:22px 15px;z-index:1000;transition:.3s}
+.logo{display:flex;align-items:center;gap:11px;padding:5px 12px 28px}.logo-mark{width:42px;height:42px;border-radius:10px;background:#fff;color:#166534;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:800}.logo h2{font-size:21px}.logo h2 span{color:#4ade80}
+.menu-title{font-size:10px;color:#82958a;text-transform:uppercase;letter-spacing:1px;padding:0 12px;margin:16px 0 9px}.nav-menu{list-style:none}.nav-menu li{margin:4px 0}
+.nav-btn,.logout-btn{width:100%;border:0;background:transparent;color:#b9c8bf;padding:12px 13px;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:13px;font-weight:500;text-align:left}.nav-btn:hover{background:#193a27;color:#fff}.nav-btn.active{background:#1d5c36;color:#fff}.icon{width:22px;text-align:center;font-size:17px}
+.sidebar-bottom{position:absolute;left:15px;right:15px;bottom:20px}.logout-btn{border:1px solid #385342;color:#ffb4b4}.logout-btn:hover{background:#3d2020}
+.main{margin-left:260px;min-height:100vh}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:500}.mobile-menu{display:none;border:0;background:none;font-size:25px;cursor:pointer}
+.search{width:310px;background:#f5f7f6;padding:10px 14px;border-radius:9px;display:flex;gap:8px}.search input{border:0;outline:0;background:transparent;width:100%}.user{display:flex;align-items:center;gap:10px;min-width:0}.user-info{min-width:0}.avatar{width:39px;height:39px;border-radius:50%;background:#dcfce7;color:#166534;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}.user-info strong{display:block;font-size:13px;overflow-wrap:anywhere}.user-info small{display:block;color:var(--muted);font-size:10px;overflow-wrap:anywhere}
+.content{padding:28px}.page{display:none;animation:showPage .3s ease}.page.active{display:block}@keyframes showPage{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:23px}.page-head h1{font-size:25px;margin-bottom:5px}.page-head p{font-size:12px;color:var(--muted)}
+.btn{border:0;border-radius:8px;padding:11px 17px;cursor:pointer;font-weight:600;font-size:12px}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}.btn-outline{background:#fff;border:1px solid var(--border);color:var(--text)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:17px;margin-bottom:20px}.card{background:#fff;border:1px solid var(--border);border-radius:13px;padding:19px}.hero-card{background:linear-gradient(135deg,#12351f,#1d6339);color:#fff;border:0}.hero-card small{color:#c9dfd0}.big-number{font-size:29px;font-weight:800;margin:12px 0}.stat-top{display:flex;justify-content:space-between}.stat-icon{width:40px;height:40px;border-radius:9px;background:var(--primary-light);display:flex;align-items:center;justify-content:center}.stat-card h3{font-size:23px;margin:13px 0 5px}.stat-card p{color:var(--muted);font-size:11px}.percent{color:var(--success);background:#ecfdf3;padding:4px 7px;border-radius:15px;font-size:9px}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:19px;margin-bottom:20px}.card-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.card-title h3{font-size:14px}.card-title span{color:var(--muted);font-size:10px}.chart-box{height:260px}
+.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.action{border:1px solid var(--border);background:#fff;padding:17px 10px;border-radius:11px;cursor:pointer}.action:hover{transform:translateY(-2px);border-color:#b9d8c3}.action-icon{width:40px;height:40px;margin:auto;border-radius:10px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:18px}.action strong{display:block;text-align:center;font-size:11px;margin-top:8px}
+.table-card{overflow:hidden}.table-wrapper{overflow-x:auto}table{width:100%;border-collapse:collapse}th{text-align:left;background:#f8faf9;color:var(--muted);font-size:10px;padding:12px}td{padding:14px 12px;border-top:1px solid var(--border);font-size:11px}.status{padding:4px 8px;border-radius:15px;font-size:9px;font-weight:600}.completed{color:#166534;background:#dcfce7}.pending{color:#92400e;background:#fef3c7}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form-group{margin-bottom:14px}.form-group label{display:block;font-size:11px;font-weight:600;margin-bottom:6px}.form-group input,.form-group select{width:100%;padding:11px;border:1px solid var(--border);border-radius:7px;outline:none;font-size:12px}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.food-card{overflow:hidden;padding:0}.food-image{height:130px;background:linear-gradient(135deg,#dcfce7,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:48px}.food-body{padding:16px}.food-body h3{font-size:14px}.food-body p{font-size:10px;color:var(--muted);margin:6px 0 12px}.price{font-weight:800;color:#166534}
+.reservation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.reservation{display:flex;justify-content:space-between;gap:15px}.reservation strong{font-size:13px}.reservation small{display:block;color:var(--muted);font-size:10px;margin-top:5px}.overlay{display:none}
+@media(max-width:1050px){.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.menu-grid,.reservation-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.mobile-menu{display:block;flex:0 0 42px;width:42px;height:42px;padding:0;border:0;background:transparent;color:var(--text);font-size:25px;line-height:1;cursor:pointer;touch-action:manipulation}.mobile-menu[aria-expanded="true"]{position:fixed;left:274px;top:14px;z-index:1101;background:#fff;border-radius:8px}.topbar{padding:0 15px;gap:10px;min-height:72px;height:auto}.search{display:none}.content{padding:17px}.page-head{align-items:flex-start;gap:10px}.page-head h1{font-size:21px}.cards{grid-template-columns:1fr}.quick-actions{grid-template-columns:repeat(2,1fr)}.form-grid,.menu-grid,.reservation-grid{grid-template-columns:1fr}.user{margin-left:auto;max-width:calc(100% - 52px)}.user-info{display:block;max-width:calc(100vw - 115px)}.user-info strong{font-size:12px}.user-info small{font-size:10px;white-space:normal}.avatar{width:36px;height:36px}.overlay.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:900}}
+
+
+@media(max-width:768px) {
+
+    .user-info {
+        display: block;
+        max-width: calc(100vw - 115px);
+    }
+
+    .user-info strong {
+        font-size: 12px;
+    }
+
+    .user-info small {
+        display: block;
+        font-size: 10px;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+.logo-image {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #fff;
+}</style></head>
+<body>
+<aside class="sidebar" id="sidebar"><div class="logo">
+    <img src="Glossy Forest Green Ribbon Emblem (1).webp" alt="STACKLY Logo" class="logo-image">
+    <h2>STACKLY<span>.</span></h2>
+</div>
+<div class="menu-title">Restaurant</div><ul class="nav-menu"><li><button class="nav-btn active" data-page="overview"><span class="icon">▦</span>Overview</button></li><li><button class="nav-btn" data-page="orders"><span class="icon">☷</span>Orders</button></li><li><button class="nav-btn" data-page="reservations"><span class="icon">▣</span>Reservations</button></li><li><button class="nav-btn" data-page="menu"><span class="icon">☰</span>Menu Management</button></li><li><button class="nav-btn" data-page="customers"><span class="icon">♙</span>Customers</button></li><li><button class="nav-btn" data-page="staff"><span class="icon">♟</span>Staff</button></li><li><button class="nav-btn" data-page="settings"><span class="icon">⚙</span>Settings</button></li></ul>
+<div class="sidebar-bottom"><button class="logout-btn" id="logoutBtn">↪ &nbsp; Logout</button></div></aside>
+<div class="overlay" id="overlay"></div><main class="main"><header class="topbar"><button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open menu" aria-expanded="false">☰</button><div class="search">🔍 <input placeholder="Search restaurant..."></div><div class="user">
+    <div class="avatar" id="userAvatar">A</div>
+
+    <div class="user-info">
+        <strong id="adminName">Admin</strong>
+        <small id="adminEmail">admin@example.com</small>
+    </div>
+</div></header>
+<section class="content">
+<div class="page active" id="overview"><div class="page-head"><div><h1>Restaurant Overview 👋</h1><p>Today's restaurant performance at a glance.</p></div><button class="btn btn-primary" onclick="go404()">+ Add Menu Item</button></div>
+<div class="cards"><div class="card hero-card"><small>Today's Revenue</small><div class="big-number">₹84,650</div><small>+18.4% from yesterday</small></div><div class="card stat-card"><div class="stat-top"><div class="stat-icon">☷</div><span class="percent">+14.2%</span></div><h3>128</h3><p>Today's Orders</p></div><div class="card stat-card"><div class="stat-top"><div class="stat-icon">▣</div><span class="percent">+8.7%</span></div><h3>46</h3><p>Reservations</p></div><div class="card stat-card"><div class="stat-top"><div class="stat-icon">★</div><span class="percent">+0.3</span></div><h3>4.8/5</h3><p>Customer Rating</p></div></div>
+<div class="grid"><div class="card"><div class="card-title"><h3>Revenue & Orders</h3><span>Last 7 days</span></div><div class="chart-box"><canvas id="adminChart"></canvas></div></div><div class="card"><div class="card-title"><h3>Order Sources</h3><span>This week</span></div><div class="chart-box"><canvas id="sourceChart"></canvas></div></div></div>
+<div class="card table-card"><div class="card-title"><h3>Recent Orders</h3><button class="btn btn-outline" onclick="go404()">View All</button></div><div class="table-wrapper"><table><thead><tr><th>Order</th><th>Customer</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead><tbody><tr><td>#ORD-1048</td><td>Priya S.</td><td>Dine-in</td><td>₹1,850</td><td><span class="status completed">Completed</span></td></tr><tr><td>#ORD-1047</td><td>Arun K.</td><td>Delivery</td><td>₹920</td><td><span class="status pending">Preparing</span></td></tr><tr><td>#ORD-1046</td><td>Meena R.</td><td>Takeaway</td><td>₹1,240</td><td><span class="status completed">Completed</span></td></tr></tbody></table></div></div></div>
+
+<div class="page" id="orders"><div class="page-head"><div><h1>Orders</h1><p>Manage restaurant orders.</p></div><button class="btn btn-primary" onclick="go404()">Create Order</button></div><div class="card table-card"><div class="table-wrapper"><table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Amount</th><th>Type</th><th>Status</th><th>Action</th></tr></thead><tbody><tr><td>#ORD-1048</td><td>Priya S.</td><td>4</td><td>₹1,850</td><td>Dine-in</td><td><span class="status completed">Completed</span></td><td><button class="btn btn-outline" onclick="go404()">View</button></td></tr><tr><td>#ORD-1047</td><td>Arun K.</td><td>3</td><td>₹920</td><td>Delivery</td><td><span class="status pending">Preparing</span></td><td><button class="btn btn-outline" onclick="go404()">View</button></td></tr></tbody></table></div></div></div>
+
+<div class="page" id="reservations"><div class="page-head"><div><h1>Reservations</h1><p>Manage today's table reservations.</p></div><button class="btn btn-primary" onclick="go404()">Add Reservation</button></div><div class="reservation-grid"><div class="card reservation"><div><strong>12:30 PM · Table 04</strong><small>Priya S. · 4 Guests</small></div><span class="status completed">Confirmed</span></div><div class="card reservation"><div><strong>1:00 PM · Table 08</strong><small>Arun K. · 2 Guests</small></div><span class="status pending">Pending</span></div><div class="card reservation"><div><strong>7:30 PM · Table 12</strong><small>Meena R. · 6 Guests</small></div><span class="status completed">Confirmed</span></div></div></div>
+
+<div class="page" id="menu"><div class="page-head"><div><h1>Menu Management</h1><p>Manage dishes, prices and availability.</p></div><button class="btn btn-primary" onclick="go404()">+ Add Dish</button></div><div class="menu-grid"><div class="card food-card"><div class="food-image">🍛</div><div class="food-body"><h3>South Indian Thali</h3><p>Traditional complete meal with seasonal sides.</p><span class="price">₹280</span> <button class="btn btn-outline" onclick="go404()">Edit</button></div></div><div class="card food-card"><div class="food-image">🍕</div><div class="food-body"><h3>Veg Supreme Pizza</h3><p>Fresh vegetables and house cheese blend.</p><span class="price">₹420</span> <button class="btn btn-outline" onclick="go404()">Edit</button></div></div><div class="card food-card"><div class="food-image">🍜</div><div class="food-body"><h3>Chef Special Noodles</h3><p>Wok tossed noodles with signature sauce.</p><span class="price">₹260</span> <button class="btn btn-outline" onclick="go404()">Edit</button></div></div></div></div>
+
+<div class="page" id="customers"><div class="page-head"><div><h1>Customers</h1><p>Restaurant customer information.</p></div></div><div class="card table-card"><div class="table-wrapper"><table><thead><tr><th>Customer</th><th>Email</th><th>Orders</th><th>Total Spent</th><th>Rating</th><th>Action</th></tr></thead><tbody><tr><td>Priya S.</td><td>priya@example.com</td><td>24</td><td>₹38,450</td><td>★★★★★</td><td><button class="btn btn-outline" onclick="go404()">View</button></td></tr><tr><td>Arun K.</td><td>arun@example.com</td><td>18</td><td>₹24,820</td><td>★★★★☆</td><td><button class="btn btn-outline" onclick="go404()">View</button></td></tr></tbody></table></div></div></div>
+
+<div class="page" id="staff"><div class="page-head"><div><h1>Staff</h1><p>Manage restaurant staff.</p></div><button class="btn btn-primary" onclick="go404()">Add Staff</button></div><div class="cards"><div class="card stat-card"><div class="stat-icon">♟</div><h3>18</h3><p>Total Staff</p></div><div class="card stat-card"><div class="stat-icon">✓</div><h3>15</h3><p>Present Today</p></div><div class="card stat-card"><div class="stat-icon">⌂</div><h3>3</h3><p>On Leave</p></div></div></div>
+
+<div class="page" id="settings"><div class="page-head"><div><h1>Settings</h1><p>Restaurant preferences.</p></div></div><div class="card"><div class="form-grid"><div class="form-group"><label>Restaurant Name</label><input value="Stackly Restaurant"></div><div class="form-group"><label>Phone</label><input value="+91 98765 43210"></div><div class="form-group"><label>Email</label><input value="restaurant@stackly.com"></div><div class="form-group"><label>Opening Time</label><input value="10:00 AM"></div></div><button class="btn btn-primary" onclick="go404()">Save Changes</button></div></div>
+</section></main>
+<script>
+const navButtons=document.querySelectorAll(".nav-btn"),pages=document.querySelectorAll(".page");
+navButtons.forEach(b=>b.addEventListener("click",()=>{showPage(b.dataset.page);navButtons.forEach(x=>x.classList.remove("active"));b.classList.add("active");closeMobileMenu()}));
+function showPage(id){pages.forEach(p=>p.classList.remove("active"));document.getElementById(id)?.classList.add("active");scrollTo({top:0,behavior:"smooth"})}
+function go404(){window.location.href="404.html"}
+const sidebar=document.getElementById("sidebar"),overlay=document.getElementById("overlay"),mobileMenu=document.getElementById("mobileMenu");
+function setMobileMenuOpen(isOpen){sidebar.classList.toggle("open",isOpen);overlay.classList.toggle("show",isOpen);mobileMenu.textContent=isOpen?"×":"☰";mobileMenu.setAttribute("aria-expanded",String(isOpen));mobileMenu.setAttribute("aria-label",isOpen?"Close menu":"Open menu")}
+mobileMenu.addEventListener("click",()=>setMobileMenuOpen(!sidebar.classList.contains("open")));
+function closeMobileMenu(){setMobileMenuOpen(false)} overlay.onclick=closeMobileMenu;
+document.getElementById("logoutBtn").onclick=()=>{if(confirm("Are you sure you want to logout?"))window.location.href="login.html"};
+
+new Chart(document.getElementById("adminChart"),{type:"line",data:{labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],datasets:[{label:"Revenue",data:[42000,51000,47000,63000,59000,76000,84650],borderColor:"#16a34a",backgroundColor:"rgba(22,163,74,.08)",fill:true,tension:.4},{label:"Orders",data:[65,78,71,94,88,112,128],borderColor:"#d97706",tension:.4}]},options:{responsive:true,maintainAspectRatio:false}});
+new Chart(document.getElementById("sourceChart"),{type:"doughnut",data:{labels:["Dine-in","Delivery","Takeaway"],datasets:[{data:[48,32,20],backgroundColor:["#166534","#22c55e","#86efac"],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:"65%"}});
+let loginData = null;
+try {
+    loginData = JSON.parse(localStorage.getItem("restaurantLogin"));
+} catch (error) {
+    loginData = null;
+}
+
+if (loginData && loginData.loggedIn && loginData.role === "admin") {
+
+    const email = loginData.email;
+    const name = loginData.name || email.split("@")[0]
+        .replace(/[._-]+/g, " ")
+        .replace(/\b\w/g, character => character.toUpperCase());
+
+    document.getElementById("adminName").textContent = name;
+    document.getElementById("adminEmail").textContent = email;
+    document.getElementById("userAvatar").textContent =
+        name.charAt(0).toUpperCase();
+
+} else {
+
+    // Login இல்லாமல் dashboard open செய்தால்
+    window.location.href = "login.html";
+}
+</script></body></html>

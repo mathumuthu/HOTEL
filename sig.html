@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>STACKLY | Create Account</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+:root{
+    --green:#166534;
+    --dark:#10251a;
+    --light:#dcfce7;
+    --border:#e5ebe7;
+    --muted:#718078;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    min-height:100vh;
+    background:linear-gradient(135deg,#f5f7f6,#e9f5ed);
+    color:#17221b;
+}
+
+.signup-wrap{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.signup-card{
+    width:100%;
+    max-width:440px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:32px;
+    box-shadow:0 20px 60px rgba(16,37,26,.12);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:24px;
+}
+
+.logo-mark{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    background:var(--dark);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.logo h1{
+    font-size:25px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#22c55e;
+}
+
+h2{
+    text-align:center;
+    font-size:24px;
+    margin-bottom:7px;
+}
+
+.sub{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:24px;
+}
+
+.field{
+    margin-bottom:16px;
+}
+
+.field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap input{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    outline:none;
+    font-size:13px;
+}
+
+.input-wrap input:focus{
+    border-color:#65a374;
+    box-shadow:0 0 0 3px rgba(22,101,52,.08);
+}
+
+.password-wrap input{
+    padding-right:45px;
+}
+
+.eye{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:transparent;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.password-rules{
+    margin-top:8px;
+    padding:9px 11px;
+    background:#f8faf9;
+    border-radius:8px;
+    font-size:10px;
+    line-height:1.7;
+    color:var(--muted);
+}
+
+.password-rules span{
+    display:block;
+}
+
+.valid{
+    color:#166534!important;
+}
+
+.invalid{
+    color:#dc2626!important;
+}
+
+.error{
+    display:none;
+    color:#dc2626;
+    font-size:11px;
+    margin-top:6px;
+}
+
+.success{
+    display:none;
+    background:#dcfce7;
+    color:#166534;
+    padding:10px;
+    border-radius:9px;
+    font-size:11px;
+    margin-bottom:12px;
+    text-align:center;
+}
+
+.create-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:var(--green);
+    color:white;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.create-btn:hover{
+    background:#14532d;
+}
+
+.signin-btn,
+.home-btn{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.signin-btn{
+    border:1px solid #86efac;
+    background:#f0fdf4;
+    color:var(--green);
+}
+
+.home-btn{
+    border:1px solid var(--border);
+    background:white;
+    color:var(--dark);
+}
+
+@media(max-width:480px){
+
+    .signup-wrap{
+        padding:14px;
+    }
+
+    .signup-card{
+        padding:24px 18px;
+        border-radius:17px;
+    }
+
+    .logo h1{
+        font-size:22px;
+    }
+
+    h2{
+        font-size:21px;
+    }
+
+}
+.logo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+    object-fit:contain;
+}
+
+.logo h1{
+    font-size:25px;
+    font-weight:800;
+    margin:0;
+}
+
+.logo span{
+    color:#22c55e;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="signup-wrap">
+
+<div class="signup-card">
+
+    <!-- Logo -->
+<div class="logo">
+    <img src="Glossy Forest Green Ribbon Emblem (1).webp" alt="STACKLY Logo">
+
+    <h1>
+        STACKLY<span></span>
+    </h1>
+</div>
+
+    <h2>Create Account</h2>
+
+    <p class="sub">
+        Create your restaurant account
+    </p>
+
+    <div class="success" id="successMessage">
+        Account created successfully!
+    </div>
+
+    <form id="signupForm">
+
+        <!-- Name -->
+
+        <div class="field">
+
+            <label>Full Name</label>
+
+            <div class="input-wrap">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+            <div class="error" id="nameError">
+                Please enter your name.
+            </div>
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="field">
+
+            <label>Email Address</label>
+
+            <div class="input-wrap">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+            <div class="error" id="emailError">
+                Please enter a valid email address.
+            </div>
+
+        </div>
+
+
+        <!-- Password -->
+
+        <div class="field">
+
+            <label>Password</label>
+
+            <div class="input-wrap password-wrap">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create strong password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="eye"
+                    id="eyeBtn">
+                    👁
+                </button>
+
+            </div>
+
+            <div class="password-rules">
+
+                <span id="lengthRule">
+                    • Minimum 8 characters
+                </span>
+
+                <span id="upperRule">
+                    • One uppercase letter
+                </span>
+
+                <span id="lowerRule">
+                    • One lowercase letter
+                </span>
+
+                <span id="numberRule">
+                    • One number
+                </span>
+
+                <span id="specialRule">
+                    • One special character
+                </span>
+
+            </div>
+
+            <div class="error" id="passwordError">
+                Password is not strong enough.
+            </div>
+
+        </div>
+
+
+        <!-- Confirm Password -->
+
+        <div class="field">
+
+            <label>Confirm Password</label>
+
+            <div class="input-wrap password-wrap">
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    required
+                >
+
+            </div>
+
+            <div class="error" id="confirmError">
+                Passwords do not match.
+            </div>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="create-btn">
+            Create Account →
+        </button>
+
+
+        <button
+            type="button"
+            class="signin-btn"
+            onclick="window.location.href='login.html'">
+            Already have an account? Sign In
+        </button>
+
+
+        <button
+            type="button"
+            class="home-btn"
+            onclick="window.location.href='index.html'">
+            ← Back Home
+        </button>
+
+    </form>
+
+</div>
+
+</div>
+
+
+<script>
+
+const form = document.getElementById("signupForm");
+
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+
+const password = document.getElementById("password");
+const confirmPassword =
+    document.getElementById("confirmPassword");
+
+const eyeBtn = document.getElementById("eyeBtn");
+
+const successMessage =
+    document.getElementById("successMessage");
+
+
+/* Password Rules */
+
+function checkPassword(value){
+
+    return {
+
+        length:value.length >= 8,
+
+        upper:/[A-Z]/.test(value),
+
+        lower:/[a-z]/.test(value),
+
+        number:/[0-9]/.test(value),
+
+        special:/[^A-Za-z0-9]/.test(value)
+
+    };
+
+}
+
+
+function updateRule(id,valid){
+
+    const element =
+        document.getElementById(id);
+
+    const text =
+        element.textContent
+        .replace("✓ ","")
+        .replace("• ","");
+
+    if(valid){
+
+        element.textContent = "✓ " + text;
+
+        element.classList.remove("invalid");
+        element.classList.add("valid");
+
+    }else{
+
+        element.textContent = "• " + text;
+
+        element.classList.remove("valid");
+        element.classList.add("invalid");
+
+    }
+
+}
+
+
+password.addEventListener("input",()=>{
+
+    const rules =
+        checkPassword(password.value);
+
+    updateRule("lengthRule",rules.length);
+    updateRule("upperRule",rules.upper);
+    updateRule("lowerRule",rules.lower);
+    updateRule("numberRule",rules.number);
+    updateRule("specialRule",rules.special);
+
+});
+
+
+/* Show Password */
+
+eyeBtn.addEventListener("click",()=>{
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        eyeBtn.textContent = "🙈";
+
+    }else{
+
+        password.type = "password";
+
+        eyeBtn.textContent = "👁";
+
+    }
+
+});
+
+
+/* Create Account */
+
+form.addEventListener("submit",(e)=>{
+
+    e.preventDefault();
+
+    const name =
+        nameInput.value.trim();
+
+    const email =
+        emailInput.value.trim();
+
+    const pass =
+        password.value;
+
+    const confirm =
+        confirmPassword.value;
+
+
+    document.querySelectorAll(".error")
+        .forEach(error=>{
+            error.style.display="none";
+        });
+
+
+    let valid = true;
+
+
+    /* Name */
+
+    if(name.length < 2){
+
+        document.getElementById("nameError")
+            .style.display="block";
+
+        valid=false;
+
+    }
+
+
+    /* Email */
+
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+
+        document.getElementById("emailError")
+            .style.display="block";
+
+        valid=false;
+
+    }
+
+
+    /* Password */
+
+    const rules =
+        checkPassword(pass);
+
+    const strongPassword =
+        rules.length &&
+        rules.upper &&
+        rules.lower &&
+        rules.number &&
+        rules.special;
+
+
+    if(!strongPassword){
+
+        document.getElementById("passwordError")
+            .style.display="block";
+
+        valid=false;
+
+    }
+
+
+    /* Confirm Password */
+
+    if(pass !== confirm){
+
+        document.getElementById("confirmError")
+            .style.display="block";
+
+        valid=false;
+
+    }
+
+
+    if(!valid) return;
+
+
+    /*
+      Demo/local account storage.
+
+      Password is NOT stored in plain text.
+      Only account email/name/role are stored.
+    */
+
+    const account = {
+
+        name:name,
+
+        email:email,
+
+        role:"user",
+
+        createdAt:new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        "restaurantAccount",
+        JSON.stringify(account)
+    );
+
+
+    successMessage.style.display="block";
+
+
+    setTimeout(()=>{
+
+        window.location.href="signin.html";
+
+    },1200);
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | STACKLY</title>
+  <meta name="description" content="Shop premium STACKLY gourmet products, signature sauces, gift sets and culinary essentials.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <style>
+    /* SHOP PAGE - uses the same STACKLY design system */
+    .shop-section{background:var(--white);padding:95px 0 120px}
+    .shop-toolbar{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:55px;border-bottom:1px solid var(--line);padding-bottom:22px}
+    .shop-count{font-size:14px;color:var(--muted);letter-spacing:.08em}
+    .shop-filters{display:flex;gap:10px;flex-wrap:wrap}
+    .shop-filter{border:1px solid var(--line);padding:10px 18px;background:transparent;color:var(--ink);font:400 12px var(--font-sans);letter-spacing:.16em;text-transform:uppercase;transition:.3s;cursor:pointer}
+    .shop-filter:hover,.shop-filter.active{background:var(--green);border-color:var(--green);color:var(--white)}
+    .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:55px 30px}
+    .product-card{background:var(--white);position:relative;overflow:hidden}
+    .product-media{position:relative;aspect-ratio:4/4.7;background:var(--cream);overflow:hidden}
+    .product-media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+    .product-card:hover .product-media img{transform:scale(1.045)}
+    .product-badge{position:absolute;top:18px;left:18px;background:var(--gold);color:var(--white);font-size:10px;letter-spacing:.18em;padding:8px 12px;text-transform:uppercase;z-index:2}
+    .product-badge.sale{background:var(--green)}
+    .product-actions{position:absolute;left:18px;right:18px;bottom:18px;display:flex;gap:8px;opacity:0;transform:translateY(12px);transition:.35s var(--ease)}
+    .product-card:hover .product-actions{opacity:1;transform:translateY(0)}
+    .product-actions a{flex:1;background:var(--white);color:var(--green);border:1px solid var(--white);text-align:center;padding:12px 8px;font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+    .product-actions a:hover{background:var(--gold);border-color:var(--gold);color:var(--white)}
+    .product-info{padding:22px 4px 0}
+    .product-category{font-size:11px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+    .product-info h3{font-size:25px;margin:7px 0 8px}
+    .product-info p{color:var(--muted);font-size:14px;line-height:1.6;min-height:45px}
+    .product-price{display:flex;align-items:center;gap:12px;margin-top:12px;font-size:15px;letter-spacing:.12em}
+    .old-price{text-decoration:line-through;color:#aaa;font-size:13px}
+    .shop-banner{margin-top:100px;background:var(--green);display:grid;grid-template-columns:1.1fr 1fr;min-height:390px;overflow:hidden}
+    .shop-banner-content{padding:65px;display:flex;flex-direction:column;justify-content:center}
+    .shop-banner-content .label{color:var(--gold-soft);margin-bottom:16px}
+    .shop-banner-content h2{color:var(--white);font-size:clamp(32px,4vw,58px);margin-bottom:18px}
+    .shop-banner-content p{color:rgba(255,255,255,.7);max-width:520px;margin-bottom:28px}
+    .shop-banner-image{min-height:390px}
+    .shop-banner-image img{width:100%;height:100%;object-fit:cover}
+    .shop-empty{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--muted);display:none}
+    .shop-empty h3{font-size:30px;margin-bottom:10px}
+
+    @media(max-width:992px){
+      .shop-section{padding:75px 0 90px}
+      .product-grid{grid-template-columns:repeat(2,1fr);gap:45px 22px}
+      .shop-toolbar{align-items:flex-start;flex-direction:column}
+      .shop-banner{grid-template-columns:1fr}
+      .shop-banner-image{height:340px;min-height:0}
+      .shop-banner-content{padding:50px 35px}
+    }
+    @media(max-width:640px){
+      .shop-section{padding:55px 0 70px}
+      .shop-toolbar{margin-bottom:35px}
+      .shop-filters{width:100%;display:grid;grid-template-columns:1fr 1fr}
+      .shop-filter{width:100%;padding:11px 7px;font-size:10px}
+      .product-grid{grid-template-columns:1fr;gap:40px}
+      .product-media{aspect-ratio:4/4.8}
+      .product-actions{opacity:1;transform:none}
+      .product-actions a{padding:11px 5px}
+      .product-info h3{font-size:24px}
+      .shop-banner{margin-top:65px}
+      .shop-banner-content{padding:42px 24px}
+      .shop-banner-image{height:270px}
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container">
+    <a href="index.html" class="brand">
+      <img src="Glossy Forest Green Ribbon Emblem (1).webp" alt="STACKLY logo" class="brand-logo">
+      <span class="brand-name">STACKLY</span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+       <ul>
+          <li><a href="index.html" >HOME</a></li>
+          <li><a href="about.html">PAGES</a></li>
+          <li><a href="blog.html">BLOG</a></li>
+          <li><a href="shop.html"class="active">SHOP</a></li>
+          <li><a href="services.html">SERVICE</a></li>
+
+          <li><a href="contact.html">CONTACT</a></li>
+          <!-- <li><a href="login.html">LOGIN</a></li> -->
+        </ul>
+    </nav>
+    <div class="header-right">
+      <a class="btn-login" href="login.html">LOGIN</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Shop</span>
+    <h1>Our Collection</h1>
+    <span class="diamond"></span>
+    <p class="lead">Bring the STACKLY experience home with our signature gourmet collection, crafted for memorable moments.</p>
+  </div>
+</section>
+
+<main class="shop-section">
+  <div class="container">
+    <div class="shop-toolbar">
+      <span class="shop-count" id="shopCount">Showing all products</span>
+      <div class="shop-filters" role="group" aria-label="Product filters">
+        <button class="shop-filter active" data-filter="all">All</button>
+        <button class="shop-filter" data-filter="sauces">Sauces</button>
+        <button class="shop-filter" data-filter="gifts">Gift Sets</button>
+        <button class="shop-filter" data-filter="pantry">Pantry</button>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <article class="product-card" data-category="sauces">
+        <div class="product-media">
+          <span class="product-badge">Signature</span>
+          <img src="hero9.webp" alt="STACKLY signature truffle sauce">
+          <div class="product-actions"><a href="404.html">Quick View</a><a href="404.html">Add to Cart</a></div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Sauces</span>
+          <h3>Signature Truffle Sauce</h3>
+          <p>Rich, aromatic and balanced with the unmistakable depth of fine truffle.</p>
+          <div class="product-price">£28.00</div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="gifts">
+        <div class="product-media">
+          <span class="product-badge">Bestseller</span>
+          <img src="hero10.webp" alt="STACKLY chef selection gift box">
+          <div class="product-actions"><a href="404.html">Quick View</a><a href="404.html">Add to Cart</a></div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Gift Sets</span>
+          <h3>Chef's Selection Box</h3>
+          <p>A curated collection of our most-loved gourmet essentials, beautifully presented.</p>
+          <div class="product-price">£65.00</div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="pantry">
+        <div class="product-media">
+          <img src="hero11.webp" alt="STACKLY gourmet olive oil">
+          <div class="product-actions"><a href="404.html">Quick View</a><a href="404.html">Add to Cart</a></div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Pantry</span>
+          <h3>Extra Virgin Olive Oil</h3>
+          <p>Cold-pressed olive oil selected for its delicate aroma and elegant finish.</p>
+          <div class="product-price">£24.00</div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="gifts">
+        <div class="product-media">
+          <span class="product-badge sale">Gift</span>
+          <img src="hero13.webp" alt="STACKLY dining gift collection">
+          <div class="product-actions"><a href="404.html">Quick View</a><a href="404.html">Add to Cart</a></div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Gift Sets</span>
+          <h3>Fine Dining Gift Card</h3>
+          <p>Give someone special an unforgettable evening at the STACKLY table.</p>
+          <div class="product-price">£100.00</div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="pantry">
+        <div class="product-media">
+          <img src="hero6 (1).webp" alt="STACKLY artisan spice collection">
+          <div class="product-actions"><a href="404.html">Quick View</a><a href="404.html">Add to Cart</a></div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Pantry</span>
+          <h3>Artisan Spice Collection</h3>
+          <p>Six carefully selected spices inspired by our kitchen's signature flavours.</p>
+          <div class="product-price">£32.00</div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="sauces">
+        <div class="product-media">
+          <span class="product-badge">New</span>
+          <img src="hero7.webp" alt="STACKLY house pepper sauce">
+          <div class="product-actions"><a href="404.html">Quick View</a><a href="404.html">Add to Cart</a></div>
+        </div>
+        <div class="product-info">
+          <span class="product-category">Sauces</span>
+          <h3>House Pepper Sauce</h3>
+          <p>A refined pepper sauce with gentle heat, designed to complement premium cuts.</p>
+          <div class="product-price"><span class="old-price">£22.00</span> £18.00</div>
+        </div>
+      </article>
+
+      <div class="shop-empty" id="shopEmpty">
+        <h3>No products found</h3>
+        <p>Try selecting another collection.</p>
+      </div>
+    </div>
+
+    <section class="shop-banner">
+      <div class="shop-banner-content">
+        <span class="label">The STACKLY Table</span>
+        <h2>A little luxury for every occasion.</h2>
+        <p>From thoughtful gifts to pantry essentials, discover the flavours and details that make STACKLY special.</p>
+        <a href="contact.html" class="btn-gold">CONTACT US</a>
+      </div>
+      <div class="shop-banner-image">
+        <img src="hero13.webp" alt="Elegant STACKLY dining experience">
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+   <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+<a href="index.html" class="brand">
+        <!-- Replace assets/images/logo.png with your own logo -->
+        <img src="Glossy Forest Green Ribbon Emblem (1).webp" alt="STACKLY logo" class="brand-logo">
+        <span class="brand-name">STACKLY</span>
+      </a>         <p>STACKLY is a fine dining restaurant where exotic cuisine, warm hospitality and an elegant atmosphere come together for those special moments in life.</p>
+        </div>
+      <div class="footer-col">
+        <h4>Useful Links</h4>
+        <ul>
+          <li><a href="about.html">Pages</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="services.html">Service</a></li>
+          <li><a href="contact.html">Contact </a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <ul>
+          <li><a href="404.html">Mon – Fri: 11 am – 11 pm</a></li>
+          <li><a href="404.html">Saturday: 10 am – 12 am</a></li>
+          <li><a href="404.html">Sunday: 10 am – 10 pm</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+            <li><span class="diamond"></span><span>123 Chinan Thirupathi,<br>Salem, Tamil Nadu</span></li>
+            <li><span class="diamond"></span><a href="tel:+4466789011">9876543211</a></li>
+            <li><span class="diamond"></span><a href="mailto:hello@stackly.com">hello@stackly.com</a></li>
+          </ul>
+        <div class="socials">
+          <a href="404.html" aria-label="Facebook">f</a>
+          <a href="404.html" aria-label="Instagram">◎</a>
+          <a href="404.html" aria-label="X">𝕏</a>
+          <a href="404.html" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> STACKLY. All rights reserved.</span>
+      <span><a href="404.html">Terms</a> &nbsp;·&nbsp; <a href="404.html">Privacy</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="side-tools">
+  <a href="404.html" aria-label="Search">⌕</a>
+  <a href="404.html" aria-label="Cart">🛒</a>
+</div>
+<button id="toTop" aria-label="Back to top">&uarr;</button>
+
+<script src="assets/js/script.js"></script>
+<script>
+(function(){
+  const header=document.getElementById('siteHeader');
+  const hamburger=document.getElementById('hamburger');
+  const nav=document.getElementById('mainNav');
+  const top=document.getElementById('toTop');
+  const filters=document.querySelectorAll('.shop-filter');
+  const cards=document.querySelectorAll('.product-card');
+  const count=document.getElementById('shopCount');
+  const empty=document.getElementById('shopEmpty');
+
+  hamburger?.addEventListener('click',()=>{
+    const open=nav.classList.toggle('open');
+    hamburger.classList.toggle('open',open);
+    hamburger.setAttribute('aria-expanded',open);
+  });
+  nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    nav.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false');
+  }));
+  window.addEventListener('scroll',()=>{
+    header.classList.toggle('site-header--scrolled',window.scrollY>30);
+    top.classList.toggle('show',window.scrollY>450);
+  });
+  top?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  filters.forEach(btn=>btn.addEventListener('click',()=>{
+    filters.forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+    const filter=btn.dataset.filter; let visible=0;
+    cards.forEach(card=>{
+      const show=filter==='all'||card.dataset.category===filter;
+      card.style.display=show?'block':'none'; if(show) visible++;
+    });
+    count.textContent=filter==='all'?'Showing all products':`Showing ${visible} ${filter.replace('-',' ')} product${visible===1?'':'s'}`;
+    empty.style.display=visible?'none':'block';
+  }));
+  document.getElementById('year').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

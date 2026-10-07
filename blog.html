@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | STACKLY</title>
+  <meta name="description" content="The STACKLY Journal — stories, recipes, dining inspiration and behind-the-scenes moments from our kitchen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+
+  <style>
+    /* BLOG PAGE - same STACKLY design language */
+    .blog-section{background:var(--white);padding:100px 0 125px}
+    .featured-post{display:grid;grid-template-columns:1.25fr 1fr;min-height:520px;background:var(--cream);margin-bottom:85px;overflow:hidden}
+    .featured-image{min-height:520px;overflow:hidden}
+    .featured-image img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+    .featured-post:hover .featured-image img{transform:scale(1.04)}
+    .featured-content{padding:clamp(38px,5vw,75px);display:flex;flex-direction:column;justify-content:center}
+    .featured-content .label{display:block;margin-bottom:18px}
+    .featured-content h2{font-size:clamp(34px,4vw,60px);line-height:1.08;margin-bottom:22px}
+    .featured-content p{color:var(--muted);max-width:520px;margin-bottom:28px}
+    .post-meta{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:15px}
+    .read-link{display:inline-flex;align-items:center;gap:12px;color:var(--green);font-size:12px;letter-spacing:.25em;text-transform:uppercase;font-weight:500;width:max-content;border-bottom:1px solid var(--gold);padding-bottom:7px}
+    .read-link:hover{color:var(--gold)}
+    .blog-heading{text-align:center;margin-bottom:55px}
+    .blog-heading h2{font-size:clamp(32px,4vw,54px);margin:12px 0}
+    .blog-heading p{color:var(--muted);max-width:650px;margin:auto}
+    .blog-filters{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:55px}
+    .blog-filter{border:1px solid var(--line);padding:10px 18px;background:transparent;color:var(--ink);font:400 11px var(--font-sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:.3s}
+    .blog-filter:hover,.blog-filter.active{background:var(--green);color:var(--white);border-color:var(--green)}
+    .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:55px 30px}
+    .post-card{background:var(--white);overflow:hidden}
+    .post-image{aspect-ratio:16/10;overflow:hidden;background:var(--cream)}
+    .post-image img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+    .post-card:hover .post-image img{transform:scale(1.05)}
+    .post-content{padding:23px 5px 0}
+    .post-content .post-meta{margin-bottom:10px}
+    .post-content h3{font-size:27px;line-height:1.15;margin-bottom:12px}
+    .post-content p{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:18px}
+    .blog-empty{grid-column:1/-1;text-align:center;padding:50px;display:none;color:var(--muted)}
+    .newsletter{margin-top:105px;background:var(--green);padding:65px 30px;text-align:center}
+    .newsletter .label{color:var(--gold-soft)}
+    .newsletter h2{color:var(--white);font-size:clamp(30px,3.6vw,50px);margin:12px 0}
+    .newsletter p{color:rgba(255,255,255,.68);max-width:580px;margin:0 auto 28px}
+    .newsletter-form{max-width:590px;margin:auto;display:flex}
+    .newsletter-form input{flex:1;min-width:0;border:1px solid rgba(255,255,255,.25);background:transparent;color:var(--white);padding:15px 18px;font:300 15px var(--font-sans);outline:none}
+    .newsletter-form input::placeholder{color:rgba(255,255,255,.55)}
+    .newsletter-form button{background:var(--gold);color:var(--white);border:1px solid var(--gold);padding:15px 25px;font:500 11px var(--font-sans);letter-spacing:.2em}
+    .newsletter-message{margin-top:14px;color:var(--gold-soft);font-size:13px;display:none}
+
+    @media(max-width:992px){
+      .blog-section{padding:75px 0 90px}
+      .featured-post{grid-template-columns:1fr}
+      .featured-image{height:400px;min-height:0}
+      .featured-content{padding:48px 35px}
+      .post-grid{grid-template-columns:repeat(2,1fr);gap:45px 22px}
+    }
+    @media(max-width:640px){
+      .blog-section{padding:55px 0 70px}
+      .featured-post{margin-bottom:65px}
+      .featured-image{height:280px}
+      .featured-content{padding:38px 24px}
+      .featured-content h2{font-size:36px}
+      .blog-heading{margin-bottom:35px}
+      .blog-filters{display:grid;grid-template-columns:1fr 1fr;margin-bottom:38px}
+      .blog-filter{font-size:10px;padding:11px 5px}
+      .post-grid{grid-template-columns:1fr;gap:40px}
+      .post-content h3{font-size:26px}
+      .newsletter{margin-top:65px;padding:45px 22px}
+      .newsletter-form{flex-direction:column;gap:10px}
+      .newsletter-form button{width:100%}
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container">
+    <a href="index.html" class="brand">
+      <img src="Glossy Forest Green Ribbon Emblem (1).webp" alt="STACKLY logo" class="brand-logo">
+      <span class="brand-name">STACKLY</span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html" >HOME</a></li>
+          <li><a href="about.html">PAGES</a></li>
+          <li><a href="blog.html"class="active">BLOG</a></li>
+          <li><a href="shop.html">SHOP</a></li>
+          <li><a href="services.html">SERVICE</a></li>
+
+          <li><a href="contact.html">CONTACT</a></li>
+          <!-- <li><a href="login.html">LOGIN</a></li> -->
+        </ul>
+    </nav>
+    <div class="header-right">
+      <a class="btn-login" href="login.html">LOGIN</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="label">The Journal</span>
+    <h1>Stories From STACKLY</h1>
+    <span class="diamond"></span>
+    <p class="lead">A closer look at our kitchen, our ingredients, our people and the ideas behind every memorable plate.</p>
+  </div>
+</section>
+
+<main class="blog-section">
+  <div class="container">
+
+    <article class="featured-post">
+      <div class="featured-image">
+        <img src="hero2.webp" alt="Chef preparing a signature STACKLY dish">
+      </div>
+      <div class="featured-content">
+        <span class="label">Featured Story</span>
+        <div class="post-meta">Kitchen Stories · October 2026</div>
+        <h2>The Art of Creating a Memorable Dining Experience</h2>
+        <p>Behind every beautiful plate is a balance of ingredients, technique and hospitality. Step inside the STACKLY kitchen and discover how our team turns simple moments into lasting memories.</p>
+        <a href="404.html" class="read-link">READ STORY →</a>
+      </div>
+    </article>
+
+    <div class="blog-heading">
+      <span class="label">From Our Journal</span>
+      <h2>Latest Stories</h2>
+      <p>Recipes, inspiration and stories from the people and places that shape the STACKLY experience.</p>
+    </div>
+
+    <div class="blog-filters">
+      <button class="blog-filter active" data-filter="all">All Stories</button>
+      <button class="blog-filter" data-filter="food">Food</button>
+      <button class="blog-filter" data-filter="kitchen">Kitchen</button>
+      <button class="blog-filter" data-filter="stories">Stories</button>
+    </div>
+
+    <div class="post-grid" id="postGrid">
+      <article class="post-card" data-category="food">
+        <div class="post-image"><img src="hero7.webp" alt="Beautifully plated gourmet dish"></div>
+        <div class="post-content">
+          <div class="post-meta">Food · 12 Oct 2026</div>
+          <h3>Five Ingredients That Define Our Signature Menu</h3>
+          <p>From earthy truffle to bright citrus, discover the flavours that give our dishes their distinctive character.</p>
+          <a href="404.html" class="read-link">READ MORE →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="kitchen">
+        <div class="post-image"><img src="hero11.webp" alt="STACKLY chef working in the kitchen"></div>
+        <div class="post-content">
+          <div class="post-meta">Kitchen · 08 Oct 2026</div>
+          <h3>A Day Behind the Pass at FOOD STACKLY</h3>
+          <p>Service starts long before the first guest arrives. Follow our chefs through a day of preparation and precision .</p>
+          <a href="404.html" class="read-link">READ MORE →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="stories">
+        <div class="post-image"><img src="hero4.webp" alt="Elegant STACKLY dining room"></div>
+        <div class="post-content">
+          <div class="post-meta">Stories · 03 Oct 2026</div>
+          <h3>Why Hospitality Is At the Heart of Everything</h3>
+          <p>Great food matters, but the feeling you take home matters too. Meet the team behind our warmest welcomes.</p>
+          <a href="404.html" class="read-link">READ MORE →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="food">
+        <div class="post-image"><img src="hero8.webp" alt="Chef preparing gourmet ingredients"></div>
+        <div class="post-content">
+          <div class="post-meta">Food · 28 Sep 2026</div>
+          <h3>The Secret to a Perfect Sauce</h3>
+          <p>Texture, temperature and patience: the small details that transform a sauce from good to unforgettable.</p>
+          <a href="404.html" class="read-link">READ MORE →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="kitchen">
+        <div class="post-image"><img src="hero3.webp" alt="STACKLY gourmet plating"></div>
+        <div class="post-content">
+          <div class="post-meta">Kitchen · 22 Sep 2026</div>
+          <h3>From Market to Plate</h3>
+          <p>How we select fresh ingredients and turn them into dishes that celebrate their natural character.</p>
+          <a href="404.html" class="read-link">READ MORE →</a>
+        </div>
+      </article>
+
+      <article class="post-card" data-category="stories">
+        <div class="post-image"><img src="hero14.webp" alt="STACKLY restaurant atmosphere"></div>
+        <div class="post-content">
+          <div class="post-meta">Stories · 15 Sep 2026</div>
+          <h3>The Little Details Guests Remember</h3>
+          <p>From the first greeting to the final course, explore the thoughtful details that complete the STACKLY experience.</p>
+          <a href="404.html" class="read-link">READ MORE →</a>
+        </div>
+      </article>
+
+      <div class="blog-empty" id="blogEmpty">No stories found in this category.</div>
+    </div>
+
+    <section class="newsletter">
+      <span class="label">Stay Inspired</span>
+      <h2>Join the STACKLY Journal</h2>
+      <p>Receive occasional stories, new menu announcements and special experiences from our kitchen.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" id="newsletterEmail" placeholder="Your email address" aria-label="Your email address" required>
+        <button type="submit">SUBSCRIBE</button>
+      </form>
+      <div class="newsletter-message" id="newsletterMessage">Thank you — you're on the list.</div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+<a href="index.html" class="brand">
+        <!-- Replace assets/images/logo.png with your own logo -->
+        <img src="Glossy Forest Green Ribbon Emblem (1).webp" alt="STACKLY logo" class="brand-logo">
+        <span class="brand-name">STACKLY</span>
+      </a>         <p>STACKLY is a fine dining restaurant where exotic cuisine, warm hospitality and an elegant atmosphere come together for those special moments in life.</p>
+        </div>
+      <div class="footer-col">
+        <h4>Useful Links</h4>
+   <ul>
+          <li><a href="about.html">Pages</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="services.html">Service</a></li>
+          <li><a href="contact.html">Contact </a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <ul>
+          <li><a href="404.html">Mon – Fri: 11 am – 11 pm</a></li>
+          <li><a href="404.html">Saturday: 10 am – 12 am</a></li>
+          <li><a href="404.html">Sunday: 10 am – 10 pm</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="footer-contact">
+            <li><span class="diamond"></span><span>123 Chinan Thirupathi,<br>Salem, Tamil Nadu</span></li>
+            <li><span class="diamond"></span><a href="tel:+4466789011">9876543211</a></li>
+            <li><span class="diamond"></span><a href="mailto:hello@stackly.com">hello@stackly.com</a></li>
+          </ul>
+        <div class="socials">
+          <a href="404.html" aria-label="Facebook">f</a>
+          <a href="404.html" aria-label="Instagram">◎</a>
+          <a href="404.html" aria-label="X">𝕏</a>
+          <a href="404.html" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> STACKLY. All rights reserved.</span>
+      <span><a href="404.html">Terms</a> &nbsp;·&nbsp; <a href="404.html">Privacy</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="side-tools">
+  <a href="404.html" aria-label="Search">⌕</a>
+  <a href="shop.html" aria-label="Shop">🛒</a>
+</div>
+<button id="toTop" aria-label="Back to top">&uarr;</button>
+
+<script src="assets/js/script.js"></script>
+<script>
+(function(){
+  const header=document.getElementById('siteHeader');
+  const hamburger=document.getElementById('hamburger');
+  const nav=document.getElementById('mainNav');
+  const top=document.getElementById('toTop');
+  const filters=document.querySelectorAll('.blog-filter');
+  const cards=document.querySelectorAll('.post-card');
+  const empty=document.getElementById('blogEmpty');
+
+  hamburger?.addEventListener('click',()=>{
+    const open=nav.classList.toggle('open');
+    hamburger.classList.toggle('open',open);
+    hamburger.setAttribute('aria-expanded',open);
+  });
+  nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    nav.classList.remove('open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false');
+  }));
+  window.addEventListener('scroll',()=>{
+    header.classList.toggle('site-header--scrolled',window.scrollY>30);
+    top.classList.toggle('show',window.scrollY>450);
+  });
+  top?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  filters.forEach(btn=>btn.addEventListener('click',()=>{
+    filters.forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+    const filter=btn.dataset.filter; let visible=0;
+    cards.forEach(card=>{
+      const show=filter==='all'||card.dataset.category===filter;
+      card.style.display=show?'block':'none'; if(show) visible++;
+    });
+    empty.style.display=visible?'none':'block';
+  }));
+
+  document.getElementById('newsletterForm')?.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(document.getElementById('newsletterEmail').checkValidity()){
+      document.getElementById('newsletterMessage').style.display='block';
+      e.target.reset();
+    }
+  });
+  document.getElementById('year').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
