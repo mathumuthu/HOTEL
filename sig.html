@@ -301,12 +301,14 @@ h2{
 
             <div class="input-wrap">
 
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Enter your full name"
-                    required
-                >
+             <input
+  type="text"
+  id="name"
+  name="name"
+  placeholder="Enter your name"
+  oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+  required
+>  
 
             </div>
 
@@ -400,18 +402,23 @@ h2{
 
         <div class="field">
 
-            <label>Confirm Password</label>
+          <div class="input-wrap password-wrap">
 
-            <div class="input-wrap password-wrap">
+    <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm your password"
+        required
+    >
 
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    placeholder="Confirm your password"
-                    required
-                >
+    <button
+        type="button"
+        class="eye"
+        id="confirmEyeBtn">
+        👁
+    </button>
 
-            </div>
+</div>
 
             <div class="error" id="confirmError">
                 Passwords do not match.
@@ -672,12 +679,28 @@ form.addEventListener("submit",(e)=>{
 
     setTimeout(()=>{
 
-        window.location.href="signin.html";
+        window.location.href="login.html";
 
     },1200);
 
 });
+/* Show Confirm Password */
 
+confirmEyeBtn.addEventListener("click", () => {
+
+    if (confirmPassword.type === "password") {
+
+        confirmPassword.type = "text";
+        confirmEyeBtn.textContent = "🙈";
+
+    } else {
+
+        confirmPassword.type = "password";
+        confirmEyeBtn.textContent = "👁";
+
+    }
+
+});
 </script>
 
 </body>

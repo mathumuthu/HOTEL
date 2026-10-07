@@ -48,7 +48,126 @@
         flex-shrink: 0;
     }
 }
+/* ================================
+   RESERVATION STATUS CENTER
+================================ */
+.reservation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 100px;
+}
 
+.reservation > div {
+    flex: 1;
+}
+
+.reservation .status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    min-height: 30px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+/* ================================
+   ORDERS TABLE SPACING
+================================ */
+#orders .table-card {
+    margin-top: 10px;
+}
+
+#orders table th,
+#orders table td {
+    vertical-align: middle;
+}
+
+#orders .status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    text-align: center;
+}
+
+
+/* ================================
+   FAVORITES SPACING
+================================ */
+#favorites .menu-grid {
+    gap: 22px;
+    align-items: stretch;
+}
+
+#favorites .food-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#favorites .food-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#favorites .food-body .price {
+    margin-top: auto;
+}
+
+#favorites .food-body .btn {
+    margin-top: 10px;
+}
+
+
+/* ================================
+   MENU + FAVORITES CARD ALIGNMENT
+================================ */
+.menu-grid {
+    align-items: stretch;
+}
+
+.food-card {
+    height: 100%;
+}
+
+.food-body {
+    min-height: 145px;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+
+    .reservation {
+        min-height: 90px;
+        padding: 16px;
+    }
+
+    .reservation .status {
+        min-width: 78px;
+        font-size: 9px;
+    }
+
+    #favorites .menu-grid {
+        gap: 18px;
+    }
+
+    #favorites .food-body {
+        min-height: 140px;
+    }
+
+    #orders .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
 
 
 

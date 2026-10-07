@@ -316,6 +316,45 @@ h2{
 
 .logo span{
     color:#22c55e;
+}.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0 22px;
+    font-size: 12px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.remember-me input {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--green);
+    cursor: pointer;
+}
+
+.forgot-password {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+    color: #14532d;
+}
+
+@media(max-width:480px) {
+    .login-options {
+        font-size: 11px;
+    }
 }
 </style>
 </head>
@@ -432,6 +471,18 @@ h2{
                 </div>
 
             </div>
+            <div class="login-options">
+
+    <label class="remember-me">
+        <input type="checkbox" id="rememberMe">
+        <span>Remember me</span>
+    </label>
+
+    <a href="404.html" class="forgot-password">
+        Forgot Password?
+    </a>
+
+</div>
 
             <!-- Sign In -->
             <button

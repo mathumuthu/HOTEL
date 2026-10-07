@@ -28,7 +28,148 @@
     object-fit: contain;
     border-radius: 10px;
     background: #fff;
-}</style></head>
+}
+
+
+
+/* ================================
+   RESERVATION STATUS CENTER
+================================ */
+.reservation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 100px;
+}
+
+.reservation > div {
+    flex: 1;
+}
+
+.reservation .status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    min-height: 30px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+/* ================================
+   ORDERS TABLE SPACING
+================================ */
+#orders .table-card {
+    margin-top: 10px;
+}
+
+#orders table th,
+#orders table td {
+    vertical-align: middle;
+}
+
+#orders .status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    text-align: center;
+}
+
+
+/* ================================
+   FAVORITES SPACING
+================================ */
+#favorites .menu-grid {
+    gap: 22px;
+    align-items: stretch;
+}
+
+#favorites .food-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#favorites .food-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#favorites .food-body .price {
+    margin-top: auto;
+}
+
+#favorites .food-body .btn {
+    margin-top: 10px;
+}
+
+
+/* ================================
+   MENU + FAVORITES CARD ALIGNMENT
+================================ */
+.menu-grid {
+    align-items: stretch;
+}
+
+.food-card {
+    height: 100%;
+}
+
+.food-body {
+    min-height: 145px;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+
+    .reservation {
+        min-height: 90px;
+        padding: 16px;
+    }
+
+    .reservation .status {
+        min-width: 78px;
+        font-size: 9px;
+    }
+
+    #favorites .menu-grid {
+        gap: 18px;
+    }
+
+    #favorites .food-body {
+        min-height: 140px;
+    }
+
+    #orders .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style></head>
 <body>
 <aside class="sidebar" id="sidebar"><div class="logo">
     <img src="Glossy Forest Green Ribbon Emblem (1).webp" alt="STACKLY Logo" class="logo-image">
@@ -40,7 +181,7 @@
 <div class="page active" id="overview"><div class="page-head"><div><h1>Welcome back, Mathu 👋</h1><p>Discover your restaurant activity.</p></div><button class="btn btn-primary" onclick="go404()">Order Now</button></div>
 <div class="cards"><div class="card hero-card"><small>Total Spent</small><div class="big-number">₹12,850</div><small>18 orders this year</small></div><div class="card stat-card"><div class="stat-top"><div class="stat-icon">☷</div><span class="percent">+4</span></div><h3>18</h3><p>Total Orders</p></div><div class="card stat-card"><div class="stat-top"><div class="stat-icon">▣</div><span class="percent">2</span></div><h3>2</h3><p>Upcoming Reservations</p></div><div class="card stat-card"><div class="stat-top"><div class="stat-icon">♥</div><span class="percent">6</span></div><h3>6</h3><p>Favorite Dishes</p></div></div>
 <div class="grid"><div class="card"><div class="card-title"><h3>My Spending</h3><span>Last 6 months</span></div><div class="chart-box"><canvas id="userChart"></canvas></div></div><div class="card"><div class="card-title"><h3>Order Types</h3><span>This year</span></div><div class="chart-box"><canvas id="userSource"></canvas></div></div></div>
-<div class="card"><div class="card-title"><h3>Quick Actions</h3><span>Manage your dining</span></div><div class="quick-actions"><button class="action" onclick="go404()"><div class="action-icon">🍽</div><strong>Order Food</strong></button><button class="action" onclick="go404()"><div class="action-icon">▣</div><strong>Book Table</strong></button><button class="action" onclick="go404()"><div class="action-icon">♥</div><strong>Favorites</strong></button><button class="action" onclick="showPage('orders')"><div class="action-icon">☷</div><strong>My Orders</strong></button></div></div>
+<div class="card"><div class="card-title"><h3>Quick Actions</h3><span>Manage your dining</span></div><div class="quick-actions"><button class="action" onclick="go404()"><div class="action-icon">🍽</div><strong>Order Food</strong></button><button class="action" onclick="go404()"><div class="action-icon">▣</div><strong>Book Table</strong></button><button class="action" onclick="go404()"><div class="action-icon">♥</div><strong>Favorites</strong></button><button class="action" onclick="go404()"><div class="action-icon">☷</div><strong>My Orders</strong></button></div></div>
 <div class="card table-card" style="margin-top:20px"><div class="card-title"><h3>Recent Orders</h3><button class="btn btn-outline" onclick="showPage('orders')">View All</button></div><div class="table-wrapper"><table><thead><tr><th>Order</th><th>Date</th><th>Items</th><th>Amount</th><th>Status</th></tr></thead><tbody><tr><td>#ORD-1048</td><td>05 Oct 2026</td><td>4 items</td><td>₹1,850</td><td><span class="status completed">Completed</span></td></tr><tr><td>#ORD-1031</td><td>29 Sep 2026</td><td>3 items</td><td>₹920</td><td><span class="status completed">Completed</span></td></tr></tbody></table></div></div></div>
 
 <div class="page" id="orders"><div class="page-head"><div><h1>My Orders</h1><p>View your restaurant order history.</p></div></div><div class="card table-card"><div class="table-wrapper"><table><thead><tr><th>Order</th><th>Date</th><th>Items</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody><tr><td>#ORD-1048</td><td>05 Oct 2026</td><td>4 items</td><td>₹1,850</td><td><span class="status completed">Completed</span></td><td><button class="btn btn-outline" onclick="go404()">Details</button></td></tr><tr><td>#ORD-1031</td><td>29 Sep 2026</td><td>3 items</td><td>₹920</td><td><span class="status completed">Completed</span></td><td><button class="btn btn-outline" onclick="go404()">Details</button></td></tr></tbody></table></div></div></div>
